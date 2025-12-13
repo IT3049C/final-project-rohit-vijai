@@ -1,5 +1,9 @@
 # GameHub
 
+## Team members
+
+Rohit Vijai
+
 ## Checklist
 
 - [ ] frequent commits to github.
