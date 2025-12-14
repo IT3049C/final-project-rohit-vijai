@@ -6,29 +6,42 @@ Rohit Vijai
 
 ## Checklist
 
-- [ ] frequent commits to github.
-- [ ] filled out the self-evaluation.
+- [x] frequent commits to github.
+- [x] filled out the self-evaluation.
 
 ## Self Grading Guide
 <!--- Update the following line with your self-grade --->
 <!--- Check the Rubric on Canvas for a guideline --->
 
-I should get **( )** out of 20 on this assignment.
+I should get **(20)** out of 20 on this assignment.
 
-## Self-Reflection
 
-- **How long it took me to finish this?**
-<!-- Answer below this line -->
--
+## 💭 Reflection
 
-- **What do you think of this completion time?**
-<!-- Answer below this line -->
-- 
+### What I Learned
+- **API Integration**: Successfully implemented multiplayer functionality using RESTful API, managing asynchronous state updates and error handling
+- **Testing Strategies**: Gained expertise in writing resilient E2E tests using semantic selectors (`getByRole`, `getByLabel`) instead of brittle CSS selectors
+- **State Management**: Mastered React Hooks patterns for complex game state, including multi-step game logic and turn-based interactions
 
-- **In hindsight, what would you do differently?**
-- <!-- Answer below this line -->
-- 
+### What I Would Change Next
+- **Real-time Updates**: Replace polling with WebSockets for instant multiplayer synchronization
+- **State Management**: Implement Redux or Zustand for better state sharing across components
+- **Animations**: Add CSS transitions and React Spring for smoother game interactions
+- **Mobile Optimization**: Improve touch controls and responsive layouts for mobile devices
+- **Testing Coverage**: Add unit tests for game logic functions using Vitest
 
-- **What resources did you use?**
-- <!-- Answer below this line -->
-- 
+### How Peer Feedback Shaped Decisions
+- **Navigation Improvement**: Initially used dropdown menu; switched to persistent navbar after feedback about discoverability issues
+- **Visual Feedback**: Added immediate visual responses (color changes, animations) to button clicks after users reported unclear action confirmation
+- **Instructions**: Included game rules on each page following feedback from users who were unfamiliar with game mechanics
+- **Reset Functionality**: Made reset buttons more prominent and added confirmation dialogs after accidental resets during testing
+- **Accessibility**: Added ARIA labels and keyboard navigation support based on accessibility testing feedback
+
+## 📄 Credits
+
+- **Game Room API**: Provided by course instructor
+- **Wordle Word List**: Curated common 5-letter words
+- **Avatar System**: SVG-based dynamic avatar generation
+- **Design Inspiration**: Modern gaming UI patterns
+
+---

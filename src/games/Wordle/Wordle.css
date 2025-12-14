@@ -1,0 +1,106 @@
+.wordle-game {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.player-greeting {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #646cff;
+}
+
+.game-info {
+  margin: 1.5rem 0;
+}
+
+.status-won {
+  color: #10b981;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.status-lost {
+  color: #ef4444;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.guesses-container {
+  margin: 2rem 0;
+}
+
+.guess-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.letter {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+.letter.correct {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.letter.present {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+.letter.absent {
+  background: #6b7280;
+  color: white;
+  border-color: #6b7280;
+}
+
+.letter.empty {
+  background: #f5f5f5;
+}
+
+body.theme-dark .letter.empty {
+  background: #2a2a2a;
+}
+
+.guess-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.guess-form input {
+  width: 200px;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+.reset-btn {
+  background: #ef4444;
+  color: white;
+  margin: 1rem 0;
+}
+
+.attempts-left {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #666;
+}
