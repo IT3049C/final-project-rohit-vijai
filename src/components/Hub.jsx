@@ -1,149 +1,128 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { saveSettings, loadSettings } from '../utils/settings';
-import { avatars } from '../utils/avatars';
 import './Hub.css';
 
 export default function Hub({ setPlayerName }) {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('wizard');
-  const [difficulty, setDifficulty] = useState('normal');
-  const [darkMode, setDarkMode] = useState(false);
-  const [greeting, setGreeting] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const settings = loadSettings();
+    const settings = localStorage.getItem('game.settings');
     if (settings) {
-      setName(settings.name || '');
-      setAvatar(settings.avatar || 'wizard');
-      setDifficulty(settings.difficulty || 'normal');
-      setDarkMode(settings.darkMode || false);
-      setGreeting(`Welcome back, ${settings.name}!`);
-      setPlayerName(settings.name);
-      document.body.classList.toggle('theme-dark', settings.darkMode);
+      const parsed = JSON.parse(settings);
+      setName(parsed.playerName || '');
+      setAvatar(parsed.avatar || 'wizard');
     }
-  }, [setPlayerName]);
+  }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (!name || name.length < 2) {
-      alert('Please enter a name (2-15 characters)');
-      return;
-    }
-    if (!avatar) {
-      alert('Please select an avatar');
-      return;
-    }
-
-    const settings = { name, avatar, difficulty, darkMode };
-    saveSettings(settings);
-    setGreeting(`Welcome, ${name}!`);
+  const handleSave = () => {
+    const settings = { playerName: name, avatar };
+    localStorage.setItem('game.settings', JSON.stringify(settings));
     setPlayerName(name);
-    document.body.classList.toggle('theme-dark', darkMode);
   };
 
-  const games = [
-    { title: 'Rock Paper Scissors', path: '/rps', description: 'Classic hand game' },
-    { title: 'Tic Tac Toe', path: '/tictactoe', description: 'X and O strategy' },
-    { title: 'Wordle', path: '/wordle', description: 'Guess the word' },
-    { title: 'Memory Cards', path: '/memory', description: 'Multiplayer matching' }
-  ];
-
   return (
-    <main className={`hub ${darkMode ? 'theme-dark' : ''}`}>
-      <h1>🎮 Game Hub</h1>
-      <p className="developer">Developer: Your Name</p>
+    <div className="hub-container">
+      <h1>Game Hub</h1>
+      
+      <div className="developer">
+        <p>Developed by Rohit Vijai</p>
+      </div>
 
-      <section className="player-setup">
-        <h2>Player Setup</h2>
-        <form id="settings-form" onSubmit={handleSave}>
-          <div className="form-group">
-            <label htmlFor="player-name">Player Name</label>
+      <div data-testid="greeting" className="player-greeting">
+        {name && `Hello, ${name}!`}
+      </div>
+      
+      <div className="player-setup">
+        <label htmlFor="player-name">Player Name:</label>
+        <input
+          id="player-name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter your name"
+        />
+
+        <div className="avatar-selection">
+          <label className="avatar-option">
             <input
-              type="text"
-              id="player-name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              maxLength={15}
-              placeholder="Enter your name"
-              required
+              type="radio"
+              name="avatar"
+              value="wizard"
+              checked={avatar === 'wizard'}
+              onChange={(e) => setAvatar(e.target.value)}
             />
-          </div>
-
-          <div className="form-group">
-            <label>Choose Avatar</label>
-            <div className="avatar-options">
-              {avatars.map((av) => (
-                <label key={av.key} className="avatar-option">
-                  <input
-                    type="radio"
-                    name="avatar"
-                    value={av.key}
-                    checked={avatar === av.key}
-                    onChange={(e) => setAvatar(e.target.value)}
-                  />
-                  <img src={av.image} alt={av.key} />
-                  <span>{av.key}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="difficulty">Difficulty</label>
-            <select
-              id="difficulty"
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value)}
-            >
-              <option value="easy">Easy</option>
-              <option value="normal">Normal</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-
-          <div className="form-group checkbox-group">
-            <label>
-              <input
-                type="checkbox"
-                id="theme-toggle"
-                checked={darkMode}
-                onChange={(e) => setDarkMode(e.target.checked)}
-              />
-              Dark Mode
-            </label>
-          </div>
-
-          <button type="submit" id="save-settings">Save Settings</button>
-        </form>
-
-        {greeting && (
-          <p data-testid="greeting" className="greeting">
-            {greeting}
-          </p>
-        )}
-      </section>
-
-      <section className="games-list">
-        <h2>Available Games</h2>
-        <div className="game-cards">
-          {games.map((game) => (
-            <div key={game.path} className="game-card">
-              <h3>{game.title}</h3>
-              <p>{game.description}</p>
-              <button
-                onClick={() => navigate(game.path)}
-                disabled={!name}
-                role="button"
-                aria-label={`Play ${game.title}`}
-              >
-                {name ? 'Play' : 'Setup Profile First'}
-              </button>
-            </div>
-          ))}
+            Wizard
+          </label>
+          <label className="avatar-option">
+            <input
+              type="radio"
+              name="avatar"
+              value="knight"
+              checked={avatar === 'knight'}
+              onChange={(e) => setAvatar(e.target.value)}
+            />
+            Knight
+          </label>
+          <label className="avatar-option">
+            <input
+              type="radio"
+              name="avatar"
+              value="rogue"
+              checked={avatar === 'rogue'}
+              onChange={(e) => setAvatar(e.target.value)}
+            />
+            Rogue
+          </label>
         </div>
-      </section>
-    </main>
+
+        <button id="save-settings" onClick={handleSave}>
+          Save Settings
+        </button>
+      </div>
+
+      <div className="games-grid">
+        <button 
+          className="game-card" 
+          onClick={() => navigate('/rps')}
+          role="button"
+          aria-label="Play Rock Paper Scissors"
+        >
+          <h2>Rock Paper Scissors</h2>
+          <p>Classic hand game</p>
+        </button>
+        
+        <button 
+          className="game-card" 
+          onClick={() => navigate('/tictactoe')}
+          role="button"
+          aria-label="Play Tic Tac Toe"
+        >
+          <h2>Tic Tac Toe</h2>
+          <p>Three in a row wins</p>
+        </button>
+        
+        <button 
+          className="game-card" 
+          onClick={() => navigate('/wordle')}
+          role="button"
+          aria-label="Play Wordle"
+        >
+          <h2>Wordle</h2>
+          <p>Guess the 5-letter word</p>
+        </button>
+        
+        <button 
+          className="game-card" 
+          onClick={() => navigate('/memory')}
+          role="button"
+          aria-label="Play Memory"
+        >
+          <h2>Memory Cards</h2>
+          <p>Match pairs to win</p>
+        </button>
+      </div>
+    </div>
   );
 }

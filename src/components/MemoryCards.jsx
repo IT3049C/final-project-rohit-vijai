@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { createRoom, getRoom, updateRoom, joinRoom } from '../utils/gameRoomAPI';
+import { createRoom, getRoom, updateRoom, joinRoom } from '../gameRoomAPI';
 import './MemoryCards.css';
 
 const EMOJIS = ['🎮', '🎯', '🎲', '🎨', '🎭', '🎪', '🎸', '🎺'];
@@ -46,7 +46,6 @@ export default function MemoryCards({ playerName }) {
     }
   }, [matched, cards, isMultiplayer, roomId, moves]);
 
-  // Poll for updates in multiplayer mode
   useEffect(() => {
     if (!isMultiplayer || !roomId || isHost) return;
 
@@ -88,7 +87,6 @@ export default function MemoryCards({ playerName }) {
         setMatched(newMatched);
         setFlipped([]);
         
-        // Update multiplayer room
         if (isMultiplayer && roomId) {
           try {
             await updateRoom(roomId, {
@@ -105,7 +103,6 @@ export default function MemoryCards({ playerName }) {
         setTimeout(() => {
           setFlipped([]);
           
-          // Update multiplayer room even on miss
           if (isMultiplayer && roomId) {
             updateRoom(roomId, {
               cards,
@@ -170,7 +167,7 @@ export default function MemoryCards({ playerName }) {
   };
 
   const handleReset = () => {
-    const shuffledCards = initializeGame();
+    initializeGame();
     setRoomId('');
     setIsMultiplayer(false);
     setIsHost(false);
@@ -180,7 +177,9 @@ export default function MemoryCards({ playerName }) {
 
   return (
     <div className="memory-game">
-      <div data-testid="greeting" className="player-greeting">
+      <a href="/" role="link" aria-label="Home">← Back to Hub</a>
+      
+      <div data-testid="player-name" className="player-greeting">
         Hello, {playerName || 'Player'}!
       </div>
       

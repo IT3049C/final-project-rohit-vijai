@@ -1,0 +1,87 @@
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.game-container h1 {
+  color: #646cff;
+  margin: 20px 0;
+}
+
+.game-container a {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #646cff;
+}
+
+.game-container a:hover {
+  background: #e0e0e0;
+}
+
+.player-greeting {
+  margin: 20px 0;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #43e97b;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.scores span {
+  color: #646cff;
+  font-size: 1.5em;
+}
+
+.moves {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.moves button {
+  padding: 15px 30px;
+  font-size: 1.1em;
+  min-width: 120px;
+}
+
+#reset-game {
+  margin: 30px 0;
+  background-color: #f44336;
+}
+
+#reset-game:hover {
+  background-color: #d32f2f;
+}
+
+#history {
+  max-width: 600px;
+  margin: 40px auto 0;
+  list-style: none;
+  padding: 0;
+}
+
+#history li {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border-left: 4px solid #646cff;
+}
+
+body.theme-dark #history li {
+  background: #2a2a2a;
+}

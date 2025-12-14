@@ -1,18 +1,10 @@
 const API_BASE_URL = 'https://game-room-api.fly.dev/api';
 
-/**
- * Create a new game room with initial state
- * @param {string} gameType - Type of game (e.g., 'memory-cards', 'tic-tac-toe')
- * @param {object} initialState - Initial game state
- * @returns {Promise<{id: string, gameState: object}>}
- */
 export async function createRoom(gameType, initialState) {
   try {
     const response = await fetch(`${API_BASE_URL}/rooms`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         initialState: {
           gameType,
@@ -21,11 +13,11 @@ export async function createRoom(gameType, initialState) {
         }
       })
     });
-
+    
     if (!response.ok) {
       throw new Error(`Failed to create room: ${response.status}`);
     }
-
+    
     const data = await response.json();
     return {
       id: data.roomId,
@@ -37,22 +29,17 @@ export async function createRoom(gameType, initialState) {
   }
 }
 
-/**
- * Get a game room by its ID
- * @param {string} roomId - The unique room identifier
- * @returns {Promise<{id: string, createdAt: string, gameState: object}>}
- */
 export async function getRoom(roomId) {
   try {
     const response = await fetch(`${API_BASE_URL}/rooms/${roomId}`);
-
+    
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error('Room not found');
       }
       throw new Error(`Failed to get room: ${response.status}`);
     }
-
+    
     const data = await response.json();
     return data;
   } catch (error) {
@@ -61,19 +48,11 @@ export async function getRoom(roomId) {
   }
 }
 
-/**
- * Update a game room's state
- * @param {string} roomId - The unique room identifier
- * @param {object} gameState - Updated game state
- * @returns {Promise<{id: string, createdAt: string, gameState: object}>}
- */
 export async function updateRoom(roomId, gameState) {
   try {
     const response = await fetch(`${API_BASE_URL}/rooms/${roomId}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         gameState: {
           ...gameState,
@@ -81,14 +60,14 @@ export async function updateRoom(roomId, gameState) {
         }
       })
     });
-
+    
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error('Room not found');
       }
       throw new Error(`Failed to update room: ${response.status}`);
     }
-
+    
     const data = await response.json();
     return data;
   } catch (error) {
@@ -97,18 +76,14 @@ export async function updateRoom(roomId, gameState) {
   }
 }
 
-/**
- * List all game rooms (for debugging)
- * @returns {Promise<Array>}
- */
 export async function listRooms() {
   try {
     const response = await fetch(`${API_BASE_URL}/rooms`);
-
+    
     if (!response.ok) {
       throw new Error(`Failed to list rooms: ${response.status}`);
     }
-
+    
     const data = await response.json();
     return data;
   } catch (error) {
@@ -117,11 +92,6 @@ export async function listRooms() {
   }
 }
 
-/**
- * Join an existing room (just validates the room exists)
- * @param {string} roomCode - The room code to join
- * @returns {Promise<{id: string, createdAt: string, gameState: object}>}
- */
 export async function joinRoom(roomCode) {
   return getRoom(roomCode);
 }

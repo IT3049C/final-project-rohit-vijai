@@ -1,5 +1,3 @@
-// Avatar configuration
-// You can replace these URLs with your own images
 export const avatars = [
   {
     key: 'wizard',

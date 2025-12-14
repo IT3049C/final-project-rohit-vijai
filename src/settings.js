@@ -1,9 +1,5 @@
 const SETTINGS_KEY = 'gameHubSettings';
 
-/**
- * Save settings to localStorage
- * @param {object} settings - Settings object containing name, avatar, difficulty, darkMode
- */
 export function saveSettings(settings) {
   try {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
@@ -12,10 +8,6 @@ export function saveSettings(settings) {
   }
 }
 
-/**
- * Load settings from localStorage
- * @returns {object|null} Settings object or null if not found
- */
 export function loadSettings() {
   try {
     const settings = localStorage.getItem(SETTINGS_KEY);
@@ -26,9 +18,6 @@ export function loadSettings() {
   }
 }
 
-/**
- * Clear settings from localStorage
- */
 export function clearSettings() {
   try {
     localStorage.removeItem(SETTINGS_KEY);

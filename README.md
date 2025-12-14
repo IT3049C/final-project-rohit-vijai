@@ -10,11 +10,8 @@ Rohit Vijai
 - [x] filled out the self-evaluation.
 
 ## Self Grading Guide
-<!--- Update the following line with your self-grade --->
-<!--- Check the Rubric on Canvas for a guideline --->
 
 I should get **(20)** out of 20 on this assignment.
-
 
 ## 💭 Reflection
 
@@ -37,11 +34,6 @@ I should get **(20)** out of 20 on this assignment.
 - **Reset Functionality**: Made reset buttons more prominent and added confirmation dialogs after accidental resets during testing
 - **Accessibility**: Added ARIA labels and keyboard navigation support based on accessibility testing feedback
 
-## 📄 Credits
+## 🚀 Setup & Run
 
-- **Game Room API**: Provided by course instructor
-- **Wordle Word List**: Curated common 5-letter words
-- **Avatar System**: SVG-based dynamic avatar generation
-- **Design Inspiration**: Modern gaming UI patterns
-
----
+### Install Dependencies
